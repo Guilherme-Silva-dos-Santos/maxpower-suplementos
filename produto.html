@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Produto - MaxPower</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <style>
+        .product-detail {
+            padding: 120px 5% 50px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .product-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .product-title {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .original-price-detail {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1.2rem;
+        }
+        
+        .discounted-price-detail {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .discount-badge {
+            background-color: #2ecc71;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .product-description {
+            margin: 20px 0;
+            line-height: 1.8;
+            color: #555;
+        }
+        
+        .product-features {
+            margin: 30px 0;
+        }
+        
+        .product-features h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .features-list {
+            list-style: none;
+        }
+        
+        .features-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features-list li i {
+            color: #2ecc71;
+            margin-right: 10px;
+        }
+        
+        .buy-options {
+            margin-top: 30px;
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .quantity-selector span {
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .quantity-btn {
+            background: #f5f5f5;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: none;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            padding: 8px 0;
+            font-size: 1rem;
+        }
+        
+        .add-to-cart-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .add-to-cart-btn:hover {
+            background-color: #e04242;
+            transform: translateY(-2px);
+        }
+        
+        .buy-now-btn {
+            display: inline-block;
+            background-color: #2ecc71;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .buy-now-btn:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        .related-products {
+            padding: 50px 5%;
+            background-color: var(--light-bg);
+        }
+        
+        .related-products h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .product-detail {
+                flex-direction: column;
+                padding-top: 100px;
+            }
+            
+            .product-title {
+                font-size: 2rem;
+            }
+            
+            .discounted-price-detail {
+                font-size: 1.8rem;
+            }
+        }
+        
+        .product-features li i {
+            color: #2ecc71;
+            margin-right: 10px;
+        }
+        
+        .price {
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+            margin: 15px 0;
+        }
+        
+        .buy-options {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>MaxPower</h1>
+            </div>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="products.html">Produtos</a></li>
+                <li><a href="#contato">Contato</a></li>
+                <li class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count"></span>
+                </li>
+                <li class="user-icon">
+                    <i class="fas fa-user-circle" id="userIcon"></i>
+                </li>
+            </ul>
+        </nav>
+        <div class="menu-overlay"></div>
+    </header>
+
+    <!-- Modal de Login -->
+    <div class="login-modal" id="loginModal">
+        <div class="modal-overlay">
+            <div class="modal-container">
+                <span class="modal-close">&times;</span>
+                <h2 class="modal-title">MaxPower</h2>
+                
+                <div class="modal-buttons">
+                    <button class="btn-google">
+                        <i class="fab fa-google"></i> Continuar com Google
+                    </button>
+                    
+                    <button class="btn-email" onclick="window.location.href='login.html'">
+                        <i class="fas fa-envelope"></i> Continuar com Email
+                    </button>
+                </div>
+                
+                <div class="modal-divider">ou</div>
+                
+                <button class="btn-signup" onclick="window.location.href='cadastro.html'">
+                    <i class="fas fa-user-plus"></i> Cadastre-se
+                </button>
+                
+                <p class="modal-terms">
+                    Ao continuar, você concorda com nossos 
+                    <a href="#">Termos</a> e 
+                    <a href="#">Privacidade</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section class="product-detail">
+            <div class="product-image">
+                <img id="product-img" src="" alt="Imagem do Produto">
+            </div>
+            
+            <div class="product-info">
+                <h1 class="product-title" id="product-title"></h1>
+                <div class="product-price" id="price-container">
+                    <span class="original-price-detail" id="original-price"></span>
+                    <span class="discounted-price-detail" id="discounted-price"></span>
+                    <span class="discount-badge" id="discount-badge">-20%</span>
+                </div>
+                
+                <div class="product-description" id="product-description">
+                </div>
+                
+                <div class="product-features">
+                    <h3>Benefícios</h3>
+                    <ul class="features-list" id="product-features">
+                    </ul>
+                </div>
+                
+                <div class="buy-options">
+                    <div class="quantity-selector">
+                        <span>Quantidade:</span>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn decrease">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" max="10">
+                            <button class="quantity-btn increase">+</button>
+                        </div>
+                    </div>
+                    
+                    <button class="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                    </button>
+                    
+                    <button class="buy-now-btn">
+                        <i class="fas fa-bolt"></i> Comprar Agora
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="related-products">
+            <h2>Produtos Relacionados</h2>
+            <div class="product-grid" id="related-products">
+                <!-- Produtos relacionados serão inseridos via JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>MaxPower</h3>
+                <p>Sua parceira em suplementos de qualidade</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p>Email: gsilvadossantos921@gmail.com</p>
+                <p>Telefone: (55) 99109-2922</p>
+            </div>
+            <div class="footer-section">
+                <h3>Redes Sociais</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MaxPower. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pegar o ID do produto da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            
+            // Banco de dados de produtos (simulado)
+            const products = {
+                'whey': {
+                    name: 'Whey Protein',
+                    originalPrice: 'R$ 149,90',
+                    discountedPrice: 'R$ 119,92',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein de alta qualidade para ganho de massa muscular. Produzido com matéria-prima importada e processado com tecnologia de ponta para garantir a máxima absorção e resultados superiores. Com 25g de proteína por dose, é ideal para atletas e praticantes de musculação.',
+                    features: [
+                        '25g de proteína por dose',
+                        'Baixo teor de carboidratos',
+                        'Rápida absorção',
+                        'Auxilia na recuperação muscular',
+                        'Ideal para pós-treino'
+                    ]
+                },
+                'bcaa': {
+                    name: 'BCAA',
+                    originalPrice: 'R$ 89,90',
+                    discountedPrice: 'R$ 71,92',
+                    image: 'imagens/bcaa.jpg',
+                    description: 'BCAA (Aminoácidos de Cadeia Ramificada) é um suplemento essencial para a recuperação muscular e prevenção do catabolismo. Composto por leucina, isoleucina e valina na proporção 2:1:1, ajuda a preservar o tecido muscular durante treinos intensos.',
+                    features: [
+                        'Proporção ideal 2:1:1',
+                        'Previne o catabolismo muscular',
+                        'Acelera a recuperação',
+                        'Pode ser consumido antes ou durante o treino',
+                        'Melhora a resistência em treinos intensos'
+                    ]
+                },
+                'creatina': {
+                    name: 'Creatina Muscletech',
+                    originalPrice: 'R$ 79,90',
+                    discountedPrice: 'R$ 63,92',
+                    image: 'imagens/creatina.jpg',
+                    description: 'Creatina Muscletech é um suplemento essencial para força e performance. A creatina monohidratada de alta pureza aumenta a energia muscular, permitindo treinos mais intensos e ganhos significativos de força e massa muscular em curto prazo.',
+                    features: [
+                        'Aumenta a força e potência muscular',
+                        '5g de creatina monohidratada por dose',
+                        'Rápida absorção',
+                        'Sem necessidade de ciclagem',
+                        'Cientificamente comprovada'
+                    ]
+                },
+                'gold': {
+                    name: 'Whey Protein Gold',
+                    originalPrice: 'R$ 129,90',
+                    discountedPrice: 'R$ 103,92',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein Gold é uma proteína premium para ganho de massa muscular. Formulado com proteína isolada e concentrada, oferece uma combinação perfeita para maximizar os resultados. Com baixo teor de gordura e carboidratos, é ideal para quem busca qualidade nutricional.',
+                    features: [
+                        '27g de proteína por dose',
+                        'Combinação de proteína isolada e concentrada',
+                        'Digestão facilitada',
+                        'Baixo teor de lactose',
+                        'Sabor superior'
+                    ]
+                },
+                'isolado': {
+                    name: 'Whey Protein Isolado Premium',
+                    originalPrice: 'R$ 199,90',
+                    discountedPrice: 'R$ 159,92',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein Isolado Premium é a opção mais pura e de alta qualidade para atletas exigentes. Com mais de 90% de proteína e quase zero carboidratos e gorduras, é ideal para períodos de definição muscular e dietas de baixa caloria.',
+                    features: [
+                        '27g de proteína isolada por dose',
+                        'Praticamente zero carboidratos',
+                        'Menos de 1g de gordura por dose',
+                        'Rápida absorção e digestão',
+                        'Perfeito para períodos de definição'
+                    ]
+                },
+                'creatinaPremium': {
+                    name: 'Creatina Premium',
+                    originalPrice: 'R$ 99,90',
+                    discountedPrice: 'R$ 79,92',
+                    image: 'imagens/creatina.jpg',
+                    description: 'Creatina Premium micronizada para máxima absorção e resultados. Nossa fórmula exclusiva é produzida com creatina de alta pureza e processada para dissolução instantânea, evitando desconfortos intestinais e maximizando os benefícios no ganho de força e potência.',
+                    features: [
+                        'Creatina 100% micronizada',
+                        'Dissolução instantânea',
+                        'Maior aumento de força e potência',
+                        'Sem retenção de água subcutânea',
+                        'Cientificamente comprovada'
+                    ]
+                },
+                'energy': {
+                    name: 'BCAA Energy',
+                    originalPrice: 'R$ 109,90',
+                    discountedPrice: 'R$ 87,92',
+                    image: 'imagens/bcaa.jpg',
+                    description: 'BCAA Energy combina aminoácidos essenciais com cafeína natural para proporcionar energia extra durante os treinos. Com a proporção ideal 2:1:1 e adição de cafeína extraída do guaraná, oferece recuperação muscular e disposição para treinos mais intensos.',
+                    features: [
+                        'Combinação de BCAA e cafeína natural',
+                        'Proporciona energia durante os treinos',
+                        'Previne o catabolismo muscular',
+                        '150mg de cafeína por dose',
+                        'Sabores refrescantes'
+                    ]
+                },
+                'multivitaminico': {
+                    name: 'Multivitamínico Daily',
+                    originalPrice: 'R$ 59,90',
+                    discountedPrice: 'R$ 53,91',
+                    image: 'imagens/creatina.jpg',
+                    description: 'Multivitamínico Daily é um suplemento completo com vitaminas e minerais essenciais para o funcionamento adequado do organismo. Desenvolvido para atletas e pessoas ativas, fortalece o sistema imunológico e contribui para o bom funcionamento do metabolismo.',
+                    features: [
+                        'Complexo com mais de 20 vitaminas e minerais',
+                        'Fortalece o sistema imunológico',
+                        'Melhora a disposição diária',
+                        'Contribui para a recuperação muscular',
+                        'Fórmula de liberação prolongada'
+                    ]
+                },
+                // Produtos da página products.html
+                'wheyGrowth': {
+                    name: 'Whey Protein Growth',
+                    originalPrice: 'R$ 159,90',
+                    discountedPrice: 'R$ 159,90',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein Growth é uma proteína concentrada premium para quem busca ganho de massa muscular de qualidade. Desenvolvido com tecnologia avançada para garantir absorção eficiente e alto teor de proteínas por dose.',
+                    features: [
+                        '26g de proteína por dose',
+                        'Fórmula avançada para ganho de massa',
+                        'Digestão facilitada',
+                        'Excelente para pós-treino',
+                        'Embalagem de 900g com medidor'
+                    ]
+                },
+                'bcaa4': {
+                    name: 'BCAA 4:1:1 Premium',
+                    originalPrice: 'R$ 89,90',
+                    discountedPrice: 'R$ 89,90',
+                    image: 'imagens/bcaa.jpg',
+                    description: 'BCAA 4:1:1 Premium oferece uma proporção avançada de aminoácidos essenciais para recuperação muscular superior. Com maior concentração de leucina, potencializa a síntese proteica e o ganho de massa muscular magra.',
+                    features: [
+                        'Proporção 4:1:1 (leucina:isoleucina:valina)',
+                        'Recuperação muscular acelerada',
+                        'Previne a perda muscular',
+                        '240g com sabor otimizado',
+                        'Dissolução instantânea'
+                    ]
+                },
+                'creatinaM': {
+                    name: 'Creatina Monohidratada',
+                    originalPrice: 'R$ 89,90',
+                    discountedPrice: 'R$ 89,90',
+                    image: 'imagens/creatina.jpg',
+                    description: 'Creatina Monohidratada pura, sem adição de carboidratos ou outras substâncias. A forma mais eficaz e cientificamente comprovada de creatina para aumento de força, potência e resistência muscular em treinos de alta intensidade.',
+                    features: [
+                        '5g de creatina pura por dose',
+                        'Aumento de força e potência muscular',
+                        'Melhora a performance em treinos intensos',
+                        '300g com medidor incluso',
+                        'Sem aditivos ou conservantes'
+                    ]
+                },
+                'bcaa2': {
+                    name: 'BCAA 2:1:1 Basic',
+                    originalPrice: 'R$ 69,90',
+                    discountedPrice: 'R$ 69,90',
+                    image: 'imagens/bcaa.jpg',
+                    description: 'BCAA 2:1:1 Basic fornece os aminoácidos essenciais na proporção clássica para recuperação muscular eficiente. Ideal para praticantes de atividades físicas que buscam prevenção de catabolismo e melhor recuperação entre treinos.',
+                    features: [
+                        'Proporção clássica 2:1:1',
+                        'Prevenção de catabolismo muscular',
+                        'Ajuda na recuperação entre treinos',
+                        '240g em pó para fácil consumo',
+                        'Excelente custo-benefício'
+                    ]
+                },
+                'wheyComplex': {
+                    name: 'Whey Protein Complex',
+                    originalPrice: 'R$ 179,90',
+                    discountedPrice: 'R$ 179,90',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein Complex combina três tipos de proteína do soro do leite (concentrada, isolada e hidrolisada) para proporcionar liberação gradual de aminoácidos. Ideal para quem busca um suplemento completo para qualquer momento do dia.',
+                    features: [
+                        'Blend de proteínas de liberação gradual',
+                        '28g de proteína por dose',
+                        'Perfil completo de aminoácidos',
+                        'Para consumo a qualquer hora do dia',
+                        'Embalagem de 900g com sabor premium'
+                    ]
+                },
+                'bcaaPowder': {
+                    name: 'BCAA Powder Plus',
+                    originalPrice: 'R$ 99,90',
+                    discountedPrice: 'R$ 99,90',
+                    image: 'imagens/bcaa.jpg',
+                    description: 'BCAA Powder Plus é uma fórmula avançada que combina os benefícios dos BCAAs com vitaminas do complexo B e eletrólitos. Ideal para repor energia durante treinos intensos e melhorar a recuperação muscular.',
+                    features: [
+                        'BCAAs + vitaminas + eletrólitos',
+                        'Hidratação durante o treino',
+                        'Ajuda a combater a fadiga',
+                        'Melhora o desempenho físico',
+                        '240g com sabores refrescantes'
+                    ]
+                },
+                'creatinaTurbo': {
+                    name: 'Creatina Turbo',
+                    originalPrice: 'R$ 119,90',
+                    discountedPrice: 'R$ 119,90',
+                    image: 'imagens/creatina.jpg',
+                    description: 'Creatina Turbo combina creatina monohidratada com beta-alanina para um efeito sinérgico no aumento de força e resistência. A fórmula proporciona maior capacidade de realizar treinos intensos e reduz a sensação de fadiga muscular.',
+                    features: [
+                        'Creatina + beta-alanina',
+                        'Aumento de força e resistência',
+                        'Redução da fadiga muscular',
+                        'Maior capacidade para treinos intensos',
+                        '300g de fórmula exclusiva'
+                    ]
+                },
+                'wheyZero': {
+                    name: 'Whey Protein Zero Lactose',
+                    originalPrice: 'R$ 189,90',
+                    discountedPrice: 'R$ 189,90',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein Zero Lactose é desenvolvido especialmente para atletas e praticantes de atividades físicas com intolerância à lactose. Mantém todos os benefícios da proteína do soro do leite sem causar desconfortos digestivos.',
+                    features: [
+                        'Zero lactose - 100% digerível',
+                        '25g de proteína por dose',
+                        'Ideal para intolerantes à lactose',
+                        'Não causa desconforto gastrointestinal',
+                        'Embalagem de 900g com sabor superior'
+                    ]
+                },
+                'creatinaHCL': {
+                    name: 'Creatina HCL',
+                    originalPrice: 'R$ 129,90',
+                    discountedPrice: 'R$ 129,90',
+                    image: 'imagens/creatina.jpg',
+                    description: 'Creatina HCL (Cloridrato) é a forma mais solúvel e biodisponível de creatina, permitindo doses menores com a mesma eficácia. Ideal para quem busca os benefícios da creatina sem retenção hídrica subcutânea ou desconfortos gastrointestinais.',
+                    features: [
+                        'Maior solubilidade e absorção',
+                        'Doses menores que a creatina comum',
+                        'Sem retenção de água subcutânea',
+                        'Ideal para períodos de definição',
+                        '300g de fórmula concentrada'
+                    ]
+                },
+                'wheyHidrolisado': {
+                    name: 'Whey Protein Hidrolisado',
+                    originalPrice: 'R$ 229,90',
+                    discountedPrice: 'R$ 229,90',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein Hidrolisado é a forma mais pura e de absorção ultra rápida da proteína do soro do leite. As proteínas já estão pré-digeridas em peptídeos menores, garantindo absorção quase imediata e máximo aproveitamento após o treino.',
+                    features: [
+                        'Proteína pré-digerida para absorção ultra rápida',
+                        '29g de proteína por dose',
+                        'Ideal para janela anabólica pós-treino',
+                        'Máximo aproveitamento nutricional',
+                        'Embalagem de 900g premium'
+                    ]
+                },
+                'bcaaVegan': {
+                    name: 'BCAA Vegan',
+                    originalPrice: 'R$ 99,90',
+                    discountedPrice: 'R$ 99,90',
+                    image: 'imagens/bcaa.jpg',
+                    description: 'BCAA Vegan é produzido a partir de aminoácidos 100% vegetais, oferecendo todos os benefícios dos BCAAs tradicionais em uma fórmula adequada para veganos e vegetarianos. Ideal para recuperação muscular e prevenção de catabolismo.',
+                    features: [
+                        '100% vegetal - sem ingredientes animais',
+                        'Proporção ideal 2:1:1',
+                        'Aceleração da recuperação muscular',
+                        'Para veganos e vegetarianos',
+                        '240g com sabores naturais'
+                    ]
+                },
+                'wheyMorango': {
+                    name: 'Whey Protein Morango',
+                    originalPrice: 'R$ 159,90',
+                    discountedPrice: 'R$ 159,90',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein sabor Morango combina alta qualidade proteica com um delicioso sabor de morango natural. Ideal para quem busca variedade de sabores sem abrir mão da qualidade nutricional para ganho de massa muscular.',
+                    features: [
+                        '25g de proteína por dose',
+                        'Delicioso sabor morango natural',
+                        'Baixo teor de gorduras e carboidratos',
+                        'Ideal para pós-treino',
+                        'Embalagem de 900g'
+                    ]
+                },
+                'wheyBaunilha': {
+                    name: 'Whey Protein Baunilha',
+                    originalPrice: 'R$ 169,90',
+                    discountedPrice: 'R$ 169,90',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein sabor Baunilha oferece uma combinação perfeita entre alta qualidade proteica e o clássico sabor de baunilha. Sua versatilidade permite misturá-lo com frutas e outros ingredientes para criar diferentes shakes proteicos.',
+                    features: [
+                        '25g de proteína por dose',
+                        'Sabor baunilha suave e versátil',
+                        'Perfeito para combinação com outros ingredientes',
+                        'Excelente dissolução',
+                        'Embalagem de 900g'
+                    ]
+                },
+                'bcaaFrutas': {
+                    name: 'BCAA Frutas Vermelhas',
+                    originalPrice: 'R$ 89,90',
+                    discountedPrice: 'R$ 89,90',
+                    image: 'imagens/bcaa.jpg',
+                    description: 'BCAA Frutas Vermelhas oferece aminoácidos essenciais para recuperação muscular com um delicioso sabor de frutas vermelhas. Refrescante e fácil de consumir durante os treinos para prevenção de catabolismo muscular.',
+                    features: [
+                        'Delicioso sabor frutas vermelhas',
+                        'Proporção ideal 2:1:1',
+                        'Previne o catabolismo muscular',
+                        'Rápida dissolução',
+                        '240g com medidor incluso'
+                    ]
+                },
+                'bcaaLimao': {
+                    name: 'BCAA Limão',
+                    originalPrice: 'R$ 94,90',
+                    discountedPrice: 'R$ 94,90',
+                    image: 'imagens/bcaa.jpg',
+                    description: 'BCAA Limão oferece todos os benefícios dos aminoácidos de cadeia ramificada com um refrescante sabor de limão. Perfeito para consumo durante treinos intensos, ajuda na recuperação muscular e previne o catabolismo.',
+                    features: [
+                        'Refrescante sabor limão',
+                        'Ideal para consumo durante o treino',
+                        'Previne catabolismo muscular',
+                        'Auxilia na recuperação',
+                        '240g de puro BCAA'
+                    ]
+                },
+                'creatinaPure': {
+                    name: 'Creatina 100% Pure',
+                    originalPrice: 'R$ 129,90',
+                    discountedPrice: 'R$ 129,90',
+                    image: 'imagens/creatina.jpg',
+                    description: 'Creatina 100% Pure é importada e oferece a mais alta pureza disponível no mercado. Desenvolvida com tecnologia avançada, garante máxima absorção e aproveitamento para ganhos significativos de força e potência muscular.',
+                    features: [
+                        'Grau farmacêutico de pureza',
+                        'Matéria-prima importada',
+                        'Máxima absorção',
+                        'Sem aditivos ou conservantes',
+                        '300g com medidor'
+                    ]
+                },
+                'wheyCookies': {
+                    name: 'Whey Protein Cookies',
+                    originalPrice: 'R$ 179,90',
+                    discountedPrice: 'R$ 179,90',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein Cookies oferece todos os benefícios da proteína do soro do leite com o irresistível sabor de cookies. Uma maneira deliciosa de suprir suas necessidades proteicas após o treino ou em qualquer momento do dia.',
+                    features: [
+                        '25g de proteína por dose',
+                        'Delicioso sabor cookies',
+                        'Baixo teor de açúcares',
+                        'Perfeito para pós-treino',
+                        'Embalagem de 900g'
+                    ]
+                },
+                'creatinaCaps': {
+                    name: 'Creatina Caps',
+                    originalPrice: 'R$ 79,90',
+                    discountedPrice: 'R$ 79,90',
+                    image: 'imagens/creatina.jpg',
+                    description: 'Creatina Caps oferece toda a eficácia da creatina monohidratada em cápsulas de fácil consumo. Ideal para quem tem dificuldade com o gosto da creatina em pó ou precisa de praticidade para consumo em qualquer lugar.',
+                    features: [
+                        'Creatina em cápsulas - fácil consumo',
+                        '3g de creatina por dose (3 cápsulas)',
+                        'Praticidade para levar a qualquer lugar',
+                        'Sem gosto de creatina',
+                        '60 cápsulas por frasco'
+                    ]
+                },
+                'wheyChocolateMint': {
+                    name: 'Whey Protein Chocolate Mint',
+                    originalPrice: 'R$ 189,90',
+                    discountedPrice: 'R$ 189,90',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein Chocolate Mint combina o sabor clássico do chocolate com um toque refrescante de menta. Uma experiência única e saborosa para seu shake proteico pós-treino, com toda a qualidade que você espera.',
+                    features: [
+                        '26g de proteína por dose',
+                        'Deliciosa combinação chocolate e menta',
+                        'Baixo teor de carboidratos',
+                        'Dissolução instantânea',
+                        'Embalagem de 900g'
+                    ]
+                },
+                'bcaaUva': {
+                    name: 'BCAA Uva',
+                    originalPrice: 'R$ 89,90',
+                    discountedPrice: 'R$ 89,90',
+                    image: 'imagens/bcaa.jpg',
+                    description: 'BCAA Uva oferece aminoácidos essenciais para recuperação muscular com um saboroso toque de uva. Refrescante e prático para consumo durante os treinos, auxilia na prevenção do catabolismo e na recuperação muscular.',
+                    features: [
+                        'Delicioso sabor uva',
+                        'Proporção ideal de BCAAs',
+                        'Previne o catabolismo muscular',
+                        'Para consumo durante o treino',
+                        '240g com medidor'
+                    ]
+                },
+                'creatinaPowder': {
+                    name: 'Creatina Powder',
+                    originalPrice: 'R$ 109,90',
+                    discountedPrice: 'R$ 109,90',
+                    image: 'imagens/creatina.jpg',
+                    description: 'Creatina Powder é uma fórmula básica e eficaz de creatina monohidratada em pó. Com excelente custo-benefício, proporciona todos os ganhos de força e performance que você espera da suplementação com creatina.',
+                    features: [
+                        '5g de creatina monohidratada por dose',
+                        'Fórmula pura e eficaz',
+                        'Dissolução eficiente',
+                        'Excelente custo-benefício',
+                        '300g com medidor'
+                    ]
+                },
+                'wheyCappuccino': {
+                    name: 'Whey Protein Cappuccino',
+                    originalPrice: 'R$ 169,90',
+                    discountedPrice: 'R$ 169,90',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein Cappuccino une a alta qualidade proteica ao delicioso sabor de cappuccino. Perfeito para os amantes de café que buscam uma opção saborosa de suplemento proteico para qualquer hora do dia.',
+                    features: [
+                        '25g de proteína por dose',
+                        'Autêntico sabor de cappuccino',
+                        'Com um toque de cafeína natural',
+                        'Ideal para manhãs ou tardes',
+                        'Embalagem de 900g'
+                    ]
+                },
+                'bcaaLaranja': {
+                    name: 'BCAA Laranja',
+                    originalPrice: 'R$ 94,90',
+                    discountedPrice: 'R$ 94,90',
+                    image: 'imagens/bcaa.jpg',
+                    description: 'BCAA Laranja oferece os benefícios dos aminoácidos essenciais com um refrescante sabor cítrico de laranja. Especialmente desenvolvido para hidratação e prevenção de catabolismo durante treinos intensos.',
+                    features: [
+                        'Refrescante sabor laranja',
+                        'Ideal para dias quentes',
+                        'Hidratação durante o treino',
+                        'Prevenção de catabolismo',
+                        '240g de fórmula otimizada'
+                    ]
+                },
+                'creatinaPremiumPlus': {
+                    name: 'Creatina Premium Plus',
+                    originalPrice: 'R$ 139,90',
+                    discountedPrice: 'R$ 139,90',
+                    image: 'imagens/creatina.jpg',
+                    description: 'Creatina Premium Plus é uma fórmula avançada que combina creatina monohidratada de alta pureza com agentes que otimizam sua absorção. Desenvolvida para atletas que buscam o máximo de resultados em força e hipertrofia.',
+                    features: [
+                        'Creatina premium com absorção otimizada',
+                        '5g de creatina por dose',
+                        'Resultados superiores',
+                        'Sem retenção subcutânea de água',
+                        '300g de fórmula exclusiva'
+                    ]
+                },
+                'wheyNeutro': {
+                    name: 'Whey Protein Neutro',
+                    originalPrice: 'R$ 159,90',
+                    discountedPrice: 'R$ 159,90',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein Neutro é ideal para quem prefere um suplemento sem sabor artificial. Perfeito para adicionar em receitas, vitaminas com frutas ou qualquer preparação sem alterar o sabor original dos ingredientes.',
+                    features: [
+                        '26g de proteína por dose',
+                        'Sem sabor - 100% neutro',
+                        'Versátil para receitas',
+                        'Sem adoçantes artificiais',
+                        'Embalagem de 900g'
+                    ]
+                },
+                'bcaaMaca': {
+                    name: 'BCAA Maçã Verde',
+                    originalPrice: 'R$ 89,90',
+                    discountedPrice: 'R$ 89,90',
+                    image: 'imagens/bcaa.jpg',
+                    description: 'BCAA Maçã Verde combina aminoácidos essenciais com o refrescante e levemente ácido sabor de maçã verde. Uma opção diferenciada para quem busca variedade de sabores na suplementação para treinos intensos.',
+                    features: [
+                        'Refrescante sabor maçã verde',
+                        'Proporção ideal de BCAAs',
+                        'Acelera a recuperação muscular',
+                        'Previne o catabolismo',
+                        '240g com medidor'
+                    ]
+                },
+                'creatinaUltra': {
+                    name: 'Creatina Ultra Pure',
+                    originalPrice: 'R$ 119,90',
+                    discountedPrice: 'R$ 119,90',
+                    image: 'imagens/creatina.jpg',
+                    description: 'Creatina Ultra Pure é uma creatina monohidratada com padrão farmacêutico de pureza. Desenvolvida para oferecer máxima eficiência no aumento de força, potência e massa muscular, com mínimos efeitos colaterais.',
+                    features: [
+                        'Certificado de análise de pureza',
+                        '5g de creatina ultra pura por dose',
+                        'Máxima eficiência nos treinos',
+                        'Mínimo risco de efeitos colaterais',
+                        '300g com medidor de precisão'
+                    ]
+                },
+                'wheyDoceLeite': {
+                    name: 'Whey Protein Doce de Leite',
+                    originalPrice: 'R$ 179,90',
+                    discountedPrice: 'R$ 179,90',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein Doce de Leite traz o sabor tradicional brasileiro para seu shake proteico. Uma combinação perfeita entre o indulgente sabor de doce de leite e a alta qualidade proteica necessária para o ganho de massa muscular.',
+                    features: [
+                        '25g de proteína por dose',
+                        'Autêntico sabor doce de leite',
+                        'Sensação de sobremesa saudável',
+                        'Perfeito para o pós-treino',
+                        'Embalagem de 900g'
+                    ]
+                },
+                'bcaaMelancia': {
+                    name: 'BCAA Melancia',
+                    originalPrice: 'R$ 94,90',
+                    discountedPrice: 'R$ 94,90',
+                    image: 'imagens/bcaa.jpg',
+                    description: 'BCAA Melancia oferece os benefícios dos aminoácidos essenciais com o refrescante e doce sabor de melancia. Especialmente desenvolvido para hidratação e recuperação muscular durante treinos intensos em dias quentes.',
+                    features: [
+                        'Refrescante sabor melancia',
+                        'Perfeito para dias quentes',
+                        'Hidratação durante treinos intensos',
+                        'Prevenção de catabolismo muscular',
+                        '240g com medidor'
+                    ]
+                },
+                'creatinaMaxPower': {
+                    name: 'Creatina Max Power',
+                    originalPrice: 'R$ 149,90',
+                    discountedPrice: 'R$ 149,90',
+                    image: 'imagens/creatina.jpg',
+                    description: 'Creatina Max Power é nossa fórmula premium de creatina, com adição de componentes que maximizam sua eficácia. Desenvolvida para atletas profissionais e praticantes avançados que buscam o máximo rendimento em força e potência.',
+                    features: [
+                        'Fórmula premium com componentes sinérgicos',
+                        'Máximo aumento de força e potência',
+                        'Rápida recuperação entre séries',
+                        'Testada por atletas profissionais',
+                        '300g de fórmula exclusiva'
+                    ]
+                },
+                'wheyChocolateBranco': {
+                    name: 'Whey Protein Chocolate Branco',
+                    originalPrice: 'R$ 189,90',
+                    discountedPrice: 'R$ 189,90',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein Chocolate Branco oferece o indulgente sabor de chocolate branco aliado à alta qualidade proteica. Uma experiência única de sabor para tornar seu pós-treino muito mais prazeroso sem comprometer seus resultados.',
+                    features: [
+                        '25g de proteína por dose',
+                        'Delicioso sabor chocolate branco',
+                        'Baixo teor de gorduras',
+                        'Sensação de sobremesa saudável',
+                        'Embalagem de 900g'
+                    ]
+                },
+                'bcaaTangerina': {
+                    name: 'BCAA Tangerina',
+                    originalPrice: 'R$ 89,90',
+                    discountedPrice: 'R$ 89,90',
+                    image: 'imagens/bcaa.jpg',
+                    description: 'BCAA Tangerina oferece os benefícios dos aminoácidos essenciais com o cítrico e refrescante sabor de tangerina. Uma opção diferenciada e aromática para consumo durante treinos intensos, ajudando na recuperação muscular.',
+                    features: [
+                        'Refrescante sabor tangerina',
+                        'Proporção ideal de BCAAs',
+                        'Aroma cítrico exclusivo',
+                        'Prevenção de catabolismo',
+                        '240g com medidor'
+                    ]
+                },
+                'creatinaElite': {
+                    name: 'Creatina Elite',
+                    originalPrice: 'R$ 129,90',
+                    discountedPrice: 'R$ 129,90',
+                    image: 'imagens/creatina.jpg',
+                    description: 'Creatina Elite Series é nossa linha premium de creatina monohidratada micronizada, com certificação internacional de pureza. Desenvolvida com tecnologia avançada para garantir máxima dissolução e zero resíduos.',
+                    features: [
+                        'Micronização avançada',
+                        'Certificação internacional de pureza',
+                        'Zero resíduos - dissolução total',
+                        'Máxima eficiência nos treinos',
+                        '300g com sistema de dosagem precisa'
+                    ]
+                },
+                'wheyPacoca': {
+                    name: 'Whey Protein Paçoca',
+                    originalPrice: 'R$ 169,90',
+                    discountedPrice: 'R$ 169,90',
+                    image: 'imagens/whey.jpg',
+                    description: 'Whey Protein Paçoca une a qualidade proteica com o autêntico sabor brasileiro de paçoca. Uma experiência única e saborosa para seu shake proteico, trazendo a sensação de um doce tradicional de maneira saudável e nutritiva.',
+                    features: [
+                        '25g de proteína por dose',
+                        'Autêntico sabor de paçoca',
+                        'Sensação de sobremesa saudável',
+                        'Baixo teor de açúcares',
+                        'Embalagem de 900g'
+                    ]
+                }
+                // Outros produtos podem ser adicionados aqui...
+            };
+            
+            // Verificar se o produto existe
+            if (productId && products[productId]) {
+                const product = products[productId];
+                
+                // Preencher os detalhes do produto
+                document.getElementById('product-img').src = product.image;
+                document.getElementById('product-img').alt = product.name;
+                document.getElementById('product-title').textContent = product.name;
+                
+                // Verificar se o produto tem preço original e preço com desconto diferentes
+                const hasDiscount = product.originalPrice !== product.discountedPrice;
+                
+                // Configurar a exibição do preço de acordo com o tipo (com ou sem desconto)
+                if (hasDiscount) {
+                    // Calcular o percentual de desconto
+                    const origPrice = parseFloat(product.originalPrice.replace('R$ ', '').replace(',', '.'));
+                    const discPrice = parseFloat(product.discountedPrice.replace('R$ ', '').replace(',', '.'));
+                    const discountPercent = Math.round((origPrice - discPrice) / origPrice * 100);
+                    
+                    // Se tiver desconto, mostrar ambos os preços e o badge de desconto
+                    document.getElementById('original-price').style.display = 'inline-block';
+                    document.getElementById('original-price').textContent = product.originalPrice;
+                    document.getElementById('discounted-price').textContent = product.discountedPrice;
+                    document.getElementById('discount-badge').textContent = `-${discountPercent}%`;
+                    document.getElementById('discount-badge').style.display = 'inline-block';
+                } else {
+                    // Se não tiver desconto, esconder o preço original e o badge, mostrar apenas o preço normal
+                    document.getElementById('original-price').style.display = 'none';
+                    document.getElementById('discounted-price').textContent = product.discountedPrice;
+                    document.getElementById('discount-badge').style.display = 'none';
+                    // Adicionar classe especial para melhor formatação
+                    document.getElementById('discounted-price').classList.add('price');
+                    document.getElementById('discounted-price').classList.remove('discounted-price');
+                }
+                
+                document.getElementById('product-description').textContent = product.description;
+                
+                // Adicionar as características
+                const featuresList = document.getElementById('product-features');
+                featuresList.innerHTML = ''; // Limpar lista antes de adicionar
+                product.features.forEach(feature => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<i class="fas fa-check-circle"></i> ${feature}`;
+                    featuresList.appendChild(li);
+                });
+                
+                // Título da página
+                document.title = `${product.name} - MaxPower`;
+                
+                // Preencher produtos relacionados (excluindo o atual)
+                const relatedProductsContainer = document.getElementById('related-products');
+                relatedProductsContainer.innerHTML = ''; // Limpar container antes de adicionar
+                
+                for (const [id, prod] of Object.entries(products)) {
+                    if (id !== productId) {
+                        const productCard = document.createElement('div');
+                        productCard.className = 'product-card';
+                        
+                        // Verificar se o produto tem preço original e preço com desconto diferentes
+                        const hasDiscount = prod.originalPrice !== prod.discountedPrice;
+                        
+                        // Construir o HTML de acordo com o tipo de preço
+                        let priceHTML = '';
+                        if (hasDiscount) {
+                            priceHTML = `
+                                <div class="price-container">
+                                    <span class="original-price">${prod.originalPrice}</span>
+                                    <span class="discounted-price">${prod.discountedPrice}</span>
+                                </div>`;
+                        } else {
+                            priceHTML = `<span class="price">${prod.discountedPrice}</span>`;
+                        }
+                        
+                        productCard.innerHTML = `
+                            <a href="produto.html?id=${id}">
+                                <img src="${prod.image}" alt="${prod.name}">
+                            </a>
+                            <h3>${prod.name}</h3>
+                            <p>${prod.description.substring(0, 70)}...</p>
+                            ${priceHTML}
+                            <button class="add-to-cart">Adicionar ao Carrinho</button>
+                        `;
+                        relatedProductsContainer.appendChild(productCard);
+                        
+                        // Limitar a exibição para no máximo 3 produtos relacionados
+                        if (relatedProductsContainer.children.length >= 3) break;
+                    }
+                }
+            } else {
+                // Redirecionar para a página principal se o produto não existir
+                window.location.href = 'index.html';
+            }
+            
+            // Controles de quantidade
+            const decreaseBtn = document.querySelector('.decrease');
+            const increaseBtn = document.querySelector('.increase');
+            const quantityInput = document.querySelector('.quantity-input');
+            
+            decreaseBtn.addEventListener('click', function() {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                }
+            });
+            
+            increaseBtn.addEventListener('click', function() {
+                let value = parseInt(quantityInput.value);
+                if (value < 10) {
+                    quantityInput.value = value + 1;
+                }
+            });
+            
+            // Botão de adicionar ao carrinho na página de detalhes do produto
+            const addToCartBtn = document.querySelector('.add-to-cart-btn');
+            if (addToCartBtn && productId && products[productId]) {
+                addToCartBtn.addEventListener('click', function() {
+                    const product = products[productId];
+                    const quantity = parseInt(document.querySelector('.quantity-input').value) || 1;
+                    
+                    // Verificar se o produto já está no carrinho
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const existingProductIndex = cart.findIndex(item => item.id === productId);
+                    
+                    if (existingProductIndex >= 0) {
+                        // Se o produto já estiver no carrinho, aumentar a quantidade
+                        cart[existingProductIndex].quantity += quantity;
+                    } else {
+                        // Se não estiver no carrinho, adicionar
+                        cart.push({
+                            id: productId,
+                            name: product.name,
+                            description: product.description.substring(0, 70) + '...',
+                            price: product.discountedPrice,
+                            image: product.image,
+                            quantity: quantity
+                        });
+                    }
+                    
+                    // Salvar carrinho atualizado
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    
+                    // Atualizar contador do carrinho
+                    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+                    document.querySelector('.cart-count').textContent = cartCount;
+                    
+                    // Efeito visual de feedback
+                    this.innerHTML = '<i class="fas fa-check"></i> Adicionado ao Carrinho';
+                    this.style.backgroundColor = '#2ecc71';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho';
+                        this.style.backgroundColor = '';
+                    }, 1500);
+                });
+            }
+            
+            // Configurar botões "Adicionar ao Carrinho" nos produtos relacionados
+            document.querySelectorAll('.related-products .add-to-cart').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Obter informações do produto do card
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('h3').textContent;
+                    const productDesc = productCard.querySelector('p').textContent;
+                    const productImage = productCard.querySelector('img').src;
+                    const productLink = productCard.querySelector('a').href;
+                    const relatedProductId = productLink.split('?id=')[1];
+                    
+                    // Obter preço (que pode estar em diferentes elementos dependendo se tem desconto)
+                    let productPrice;
+                    if (productCard.querySelector('.discounted-price')) {
+                        productPrice = productCard.querySelector('.discounted-price').textContent;
+                    } else {
+                        productPrice = productCard.querySelector('.price').textContent;
+                    }
+                    
+                    // Verificar se o produto já está no carrinho
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const existingProductIndex = cart.findIndex(item => item.id === relatedProductId);
+                    
+                    if (existingProductIndex >= 0) {
+                        // Se o produto já estiver no carrinho, aumentar a quantidade
+                        cart[existingProductIndex].quantity += 1;
+                    } else {
+                        // Se não estiver no carrinho, adicionar
+                        cart.push({
+                            id: relatedProductId,
+                            name: productName,
+                            description: productDesc,
+                            price: productPrice,
+                            image: productImage,
+                            quantity: 1
+                        });
+                    }
+                    
+                    // Salvar carrinho atualizado
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    
+                    // Atualizar contador do carrinho
+                    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+                    document.querySelector('.cart-count').textContent = cartCount;
+                    
+                    // Efeito visual de feedback
+                    this.textContent = 'Adicionado ✓';
+                    this.style.backgroundColor = '#2ecc71';
+                    
+                    setTimeout(() => {
+                        this.textContent = 'Adicionar ao Carrinho';
+                        this.style.backgroundColor = '';
+                    }, 1500);
+                });
+            });
+            
+            // Modal de login - garantindo que não apareça automaticamente
+            const userIcon = document.getElementById('userIcon');
+            const loginModal = document.getElementById('loginModal');
+            
+            // Remover qualquer classe 'active' do modal ao carregar a página
+            if (loginModal) {
+                loginModal.classList.remove('active');
+            }
+            
+            if (userIcon && loginModal) {
+                userIcon.addEventListener('click', function() {
+                    loginModal.classList.add('active');
+                });
+                
+                const closeBtn = document.querySelector('.modal-close');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', function() {
+                        loginModal.classList.remove('active');
+                    });
+                }
+            }
+            
+            // Fechar o modal ao clicar fora dele
+            const modalOverlay = document.querySelector('.modal-overlay');
+            if (modalOverlay) {
+                modalOverlay.addEventListener('click', function(e) {
+                    if (e.target === modalOverlay) {
+                        loginModal.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+ 

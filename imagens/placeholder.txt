@@ -1,0 +1,9 @@
+Arquivos de imagem necessários para a loja:
+
+1. whey.jpg - Imagem de um pote de Whey Protein
+2. bcaa.jpg - Imagem de um pote ou embalagem de BCAA
+3. creatina.jpg - Imagem de um pote de Creatina Muscletech
+
+Estas imagens devem ser salvas nesta pasta para que o site funcione corretamente. Idealmente, use imagens com tamanho aproximado de 500x500 pixels e fundo neutro/transparente para melhor visualização no site.
+
+Você pode usar fotos reais dos produtos ou imagens representativas para fins de demonstração. 

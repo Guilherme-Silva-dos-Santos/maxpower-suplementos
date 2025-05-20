@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - MaxPower</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Estilos específicos para a página de produtos */
+        .products-page {
+            margin-top: 0; /* Removido o espaço para o cabeçalho, já que ele não é mais fixo */
+            padding: 0 20px 40px;
+        }
+        
+        .all-products {
+            padding-top: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+            margin: 10px 0;
+        }
+        
+        /* Estilo para o campo de pesquisa */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            display: flex;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+        
+        #search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        #search-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        #search-button:hover {
+            background-color: #e04242;
+        }
+        
+        .no-results {
+            text-align: center;
+            width: 100%;
+            padding: 30px;
+            font-size: 1.2rem;
+            color: #666;
+            grid-column: 1 / -1;
+        }
+        
+        /* Responsividade para dispositivos móveis */
+        @media (max-width: 768px) {
+            .search-container {
+                max-width: 95%;
+                margin: 0 auto 20px;
+            }
+            
+            #search-input {
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+            
+            #search-button {
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <h1>MaxPower</h1>
+                </a>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="index.html#contato">Contato</a></li>
+            </ul>
+            
+            <div class="icon-group">
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count"></span>
+                </div>
+                <div class="user-icon">
+                    <i class="fas fa-user-circle" id="userIcon"></i>
+                </div>
+            </div>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+        <div class="menu-overlay"></div>
+    </header>
+
+    <!-- Modal de Login -->
+    <div class="login-modal" id="loginModal">
+        <div class="modal-overlay">
+            <div class="modal-container">
+                <span class="modal-close">&times;</span>
+                <h2 class="modal-title">MaxPower</h2>
+                
+                <div class="modal-buttons">
+                    <button class="btn-google">
+                        <i class="fab fa-google"></i> Continuar com Google
+                    </button>
+                    
+                    <button class="btn-email" onclick="window.location.href='login.html'">
+                        <i class="fas fa-envelope"></i> Continuar com Email
+                    </button>
+                </div>
+                
+                <div class="modal-divider">ou</div>
+                
+                <button class="btn-signup" onclick="window.location.href='cadastro.html'">
+                    <i class="fas fa-user-plus"></i> Cadastre-se
+                </button>
+                
+                <p class="modal-terms">
+                    Ao continuar, você concorda com nossos 
+                    <a href="#">Termos</a> e 
+                    <a href="#">Privacidade</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <main class="products-page">
+        <section class="all-products" id="produtos">
+            <h2>Nossos Produtos</h2>
+            
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Pesquisar produtos...">
+                <button id="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <a href="produto.html?id=wheyGrowth">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Growth">
+                    </a>
+                    <h3>Whey Protein Growth</h3>
+                    <p>Proteína concentrada de alta qualidade - 900g</p>
+                    <span class="price">R$ 159,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=bcaa4">
+                        <img src="imagens/bcaa.jpg" alt="BCAA 4:1:1">
+                    </a>
+                    <h3>BCAA 4:1:1 Premium</h3>
+                    <p>Recuperação muscular avançada - 240g</p>
+                    <span class="price">R$ 89,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=creatinaM">
+                        <img src="imagens/creatina.jpg" alt="Creatina Monohidratada">
+                    </a>
+                    <h3>Creatina Monohidratada</h3>
+                    <p>Creatina pura - 300g</p>
+                    <span class="price">R$ 89,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=bcaa2">
+                        <img src="imagens/bcaa.jpg" alt="BCAA 2:1:1">
+                    </a>
+                    <h3>BCAA 2:1:1 Basic</h3>
+                    <p>Recuperação muscular - 240g</p>
+                    <span class="price">R$ 69,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=isolado">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Isolado">
+                    </a>
+                    <h3>Whey Protein Isolado Premium</h3>
+                    <p>Proteína isolada para definição - 900g</p>
+                    <span class="price">R$ 199,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=creatinaPremium">
+                        <img src="imagens/creatina.jpg" alt="Creatina Premium">
+                    </a>
+                    <h3>Creatina Premium</h3>
+                    <p>Creatina micronizada - 300g</p>
+                    <span class="price">R$ 99,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=wheyComplex">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Complex">
+                    </a>
+                    <h3>Whey Protein Complex</h3>
+                    <p>Blend proteico completo - 900g</p>
+                    <span class="price">R$ 179,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=bcaaPowder">
+                        <img src="imagens/bcaa.jpg" alt="BCAA Powder">
+                    </a>
+                    <h3>BCAA Powder Plus</h3>
+                    <p>Com vitaminas e eletrólitos - 240g</p>
+                    <span class="price">R$ 99,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=creatinaTurbo">
+                        <img src="imagens/creatina.jpg" alt="Creatina Turbo">
+                    </a>
+                    <h3>Creatina Turbo</h3>
+                    <p>Com beta-alanina - 300g</p>
+                    <span class="price">R$ 119,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=wheyZero">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Zero Lactose">
+                    </a>
+                    <h3>Whey Protein Zero Lactose</h3>
+                    <p>Para intolerantes à lactose - 900g</p>
+                    <span class="price">R$ 189,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=energy">
+                        <img src="imagens/bcaa.jpg" alt="BCAA Energy">
+                    </a>
+                    <h3>BCAA Energy</h3>
+                    <p>Com cafeína e taurina - 240g</p>
+                    <span class="price">R$ 109,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=creatinaHCL">
+                        <img src="imagens/creatina.jpg" alt="Creatina HCL">
+                    </a>
+                    <h3>Creatina HCL</h3>
+                    <p>Maior absorção - 300g</p>
+                    <span class="price">R$ 129,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=wheyHidrolisado">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Hidrolisado">
+                    </a>
+                    <h3>Whey Protein Hidrolisado</h3>
+                    <p>Absorção ultra rápida - 900g</p>
+                    <span class="price">R$ 229,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=bcaaVegan">
+                        <img src="imagens/bcaa.jpg" alt="BCAA Vegan">
+                    </a>
+                    <h3>BCAA Vegan</h3>
+                    <p>100% vegetal - 240g</p>
+                    <span class="price">R$ 99,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=wheyMorango">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Morango">
+                    </a>
+                    <h3>Whey Protein Morango</h3>
+                    <p>Sabor Morango - 900g</p>
+                    <span class="price">R$ 159,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=wheyBaunilha">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Baunilha">
+                    </a>
+                    <h3>Whey Protein Baunilha</h3>
+                    <p>Sabor Baunilha - 900g</p>
+                    <span class="price">R$ 169,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=bcaaFrutas">
+                        <img src="imagens/bcaa.jpg" alt="BCAA Frutas Vermelhas">
+                    </a>
+                    <h3>BCAA Frutas Vermelhas</h3>
+                    <p>Sabor Frutas Vermelhas - 240g</p>
+                    <span class="price">R$ 89,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=bcaaLimao">
+                        <img src="imagens/bcaa.jpg" alt="BCAA Limão">
+                    </a>
+                    <h3>BCAA Limão</h3>
+                    <p>Sabor Limão - 240g</p>
+                    <span class="price">R$ 94,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=creatinaPure">
+                        <img src="imagens/creatina.jpg" alt="Creatina 100% Pure">
+                    </a>
+                    <h3>Creatina 100% Pure</h3>
+                    <p>Creatina Pura Importada - 300g</p>
+                    <span class="price">R$ 129,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=wheyCookies">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Cookies">
+                    </a>
+                    <h3>Whey Protein Cookies</h3>
+                    <p>Sabor Cookies - 900g</p>
+                    <span class="price">R$ 179,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=creatinaCaps">
+                        <img src="imagens/creatina.jpg" alt="Creatina Caps">
+                    </a>
+                    <h3>Creatina Caps</h3>
+                    <p>60 cápsulas</p>
+                    <span class="price">R$ 79,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=wheyChocolateMint">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Chocolate Mint">
+                    </a>
+                    <h3>Whey Protein Chocolate Mint</h3>
+                    <p>Sabor Chocolate com Menta - 900g</p>
+                    <span class="price">R$ 189,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=bcaaUva">
+                        <img src="imagens/bcaa.jpg" alt="BCAA Uva">
+                    </a>
+                    <h3>BCAA Uva</h3>
+                    <p>Sabor Uva - 240g</p>
+                    <span class="price">R$ 89,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=creatinaPowder">
+                        <img src="imagens/creatina.jpg" alt="Creatina Powder">
+                    </a>
+                    <h3>Creatina Powder</h3>
+                    <p>Creatina em Pó - 300g</p>
+                    <span class="price">R$ 109,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=wheyCappuccino">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Cappuccino">
+                    </a>
+                    <h3>Whey Protein Cappuccino</h3>
+                    <p>Sabor Cappuccino - 900g</p>
+                    <span class="price">R$ 169,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=bcaaLaranja">
+                        <img src="imagens/bcaa.jpg" alt="BCAA Laranja">
+                    </a>
+                    <h3>BCAA Laranja</h3>
+                    <p>Sabor Laranja - 240g</p>
+                    <span class="price">R$ 94,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=creatinaPremiumPlus">
+                        <img src="imagens/creatina.jpg" alt="Creatina Premium Plus">
+                    </a>
+                    <h3>Creatina Premium Plus</h3>
+                    <p>Creatina Premium - 300g</p>
+                    <span class="price">R$ 139,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=wheyNeutro">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Neutro">
+                    </a>
+                    <h3>Whey Protein Neutro</h3>
+                    <p>Sem Sabor - 900g</p>
+                    <span class="price">R$ 159,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=bcaaMaca">
+                        <img src="imagens/bcaa.jpg" alt="BCAA Maçã Verde">
+                    </a>
+                    <h3>BCAA Maçã Verde</h3>
+                    <p>Sabor Maçã Verde - 240g</p>
+                    <span class="price">R$ 89,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=creatinaUltra">
+                        <img src="imagens/creatina.jpg" alt="Creatina Ultra Pure">
+                    </a>
+                    <h3>Creatina Ultra Pure</h3>
+                    <p>Creatina Ultra Pura - 300g</p>
+                    <span class="price">R$ 119,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=wheyDoceLeite">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Doce de Leite">
+                    </a>
+                    <h3>Whey Protein Doce de Leite</h3>
+                    <p>Sabor Doce de Leite - 900g</p>
+                    <span class="price">R$ 179,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=bcaaMelancia">
+                        <img src="imagens/bcaa.jpg" alt="BCAA Melancia">
+                    </a>
+                    <h3>BCAA Melancia</h3>
+                    <p>Sabor Melancia - 240g</p>
+                    <span class="price">R$ 94,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=creatinaMaxPower">
+                        <img src="imagens/creatina.jpg" alt="Creatina Max Power">
+                    </a>
+                    <h3>Creatina Max Power</h3>
+                    <p>Creatina Premium - 300g</p>
+                    <span class="price">R$ 149,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=wheyChocolateBranco">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Chocolate Branco">
+                    </a>
+                    <h3>Whey Protein Chocolate Branco</h3>
+                    <p>Sabor Chocolate Branco - 900g</p>
+                    <span class="price">R$ 189,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=bcaaTangerina">
+                        <img src="imagens/bcaa.jpg" alt="BCAA Tangerina">
+                    </a>
+                    <h3>BCAA Tangerina</h3>
+                    <p>Sabor Tangerina - 240g</p>
+                    <span class="price">R$ 89,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=creatinaElite">
+                        <img src="imagens/creatina.jpg" alt="Creatina Elite">
+                    </a>
+                    <h3>Creatina Elite</h3>
+                    <p>Creatina Elite Series - 300g</p>
+                    <span class="price">R$ 129,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="product-card">
+                    <a href="produto.html?id=wheyPacoca">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Paçoca">
+                    </a>
+                    <h3>Whey Protein Paçoca</h3>
+                    <p>Sabor Paçoca - 900g</p>
+                    <span class="price">R$ 169,90</span>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <div class="page-controls">
+                    <button class="page-arrow prev-page">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span class="page-number">1</span>
+                    <button class="page-arrow next-page">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><a href="index.html" style="text-decoration: none; color: inherit;">MaxPower</a></h3>
+                <p>Sua parceira em suplementos de qualidade</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p>Email: gsilvadossantos921@gmail.com</p>
+                <p>Telefone: (55) 99109-2922</p>
+            </div>
+            <div class="footer-section">
+                <h3>Redes Sociais</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MaxPower. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se estamos retornando de um fluxo de autenticação OAuth do Google
+            if (window.location.hash.includes('access_token')) {
+                try {
+                    // Extrair token e outras informações da URL
+                    const fragmentString = window.location.hash.substring(1);
+                    const params = {};
+                    const regex = /([^&=]+)=([^&]*)/g;
+                    let m;
+                    
+                    while (m = regex.exec(fragmentString)) {
+                        params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+                    }
+                    
+                    if (params.access_token) {
+                        // Buscar informações do perfil usando o token
+                        fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                            headers: {
+                                'Authorization': `Bearer ${params.access_token}`
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Enviar mensagem para a janela principal
+                            window.opener.postMessage({
+                                type: 'googleAuth',
+                                credential: {
+                                    name: data.name,
+                                    email: data.email,
+                                    picture: data.picture
+                                }
+                            }, window.location.origin);
+                            
+                            // Fechar esta janela popup
+                            if (window.opener) {
+                                window.close();
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erro ao buscar informações do usuário:', error);
+                        });
+                    }
+                } catch (e) {
+                    console.error('Erro ao processar resposta de autenticação:', e);
+                }
+            }
+
+            // Configurar o menu mobile
+            const menuToggle = document.getElementById('mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            const iconGroup = document.querySelector('.icon-group');
+            const menuOverlay = document.querySelector('.menu-overlay');
+            const userIcon = document.getElementById('userIcon');
+            const loginModal = document.getElementById('loginModal');
+            
+            // Adicionar classe mobile ao grupo de ícones para estilo mobile
+            function addMobileClass() {
+                if (window.innerWidth <= 768) {
+                    iconGroup.classList.add('mobile');
+                } else {
+                    iconGroup.classList.remove('mobile');
+                    iconGroup.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    menuOverlay.classList.remove('active');
+                }
+            }
+            
+            // Verificar ao carregar e ao redimensionar
+            addMobileClass();
+            window.addEventListener('resize', addMobileClass);
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    iconGroup.classList.toggle('active');
+                    menuOverlay.classList.toggle('active');
+                    document.body.classList.toggle('no-scroll');
+                });
+            }
+            
+            if (menuOverlay) {
+                menuOverlay.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    iconGroup.classList.remove('active');
+                    menuOverlay.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                });
+            }
+            
+            if (userIcon) {
+                userIcon.addEventListener('click', function() {
+                    loginModal.classList.add('active');
+                });
+            }
+            
+            const modalClose = document.querySelector('.modal-close');
+            if (modalClose) {
+                modalClose.addEventListener('click', function() {
+                    loginModal.classList.remove('active');
+                });
+            }
+            
+            // Configurar a paginação conforme solicitado
+            const productGrid = document.querySelector('.product-grid');
+            const prevPage = document.querySelector('.prev-page');
+            const nextPage = document.querySelector('.next-page');
+            const pageNumber = document.querySelector('.page-number');
+            
+            // Variáveis para a pesquisa
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            const allProducts = Array.from(productGrid.children);
+            let currentPage = 1;
+            const maxPages = 3;
+            const productsPerPage = [9, 9, 6];
+            let filteredProducts = [...allProducts];
+            
+            // Função para mostrar produtos com base na página atual
+            function showProducts(page, products) {
+                // Esconder todos os produtos primeiro
+                allProducts.forEach(product => {
+                    product.style.display = 'none';
+                });
+                
+                if (products.length === 0) {
+                    // Se não houver resultados, mostrar mensagem
+                    if (!document.querySelector('.no-results')) {
+                        const noResults = document.createElement('div');
+                        noResults.className = 'no-results';
+                        noResults.textContent = 'Nenhum produto encontrado. Tente outra pesquisa.';
+                        productGrid.appendChild(noResults);
+                    }
+                    
+                    // Atualizar controles de paginação
+                    if (prevPage && nextPage) {
+                        prevPage.style.display = 'none';
+                        nextPage.style.display = 'none';
+                        if (pageNumber) pageNumber.textContent = '1';
+                    }
+                    
+                    return;
+                } else {
+                    // Remover mensagem de "nenhum resultado" se existir
+                    const noResults = document.querySelector('.no-results');
+                    if (noResults) {
+                        productGrid.removeChild(noResults);
+                    }
+                }
+                
+                // Calcular os limites de exibição para cada página
+                const totalToShow = productsPerPage[page-1];
+                let start = 0;
+                
+                // Calcular o início com base nos produtos exibidos nas páginas anteriores
+                for (let i = 0; i < page-1; i++) {
+                    start += productsPerPage[i];
+                }
+                
+                const end = Math.min(start + totalToShow, products.length);
+                
+                // Mostrar apenas os produtos da página atual
+                for (let i = start; i < end; i++) {
+                    if (products[i]) {
+                        products[i].style.display = 'flex';
+                    }
+                }
+                
+                // Reconfigurar os botões após mudança de página
+                setupAddToCartButtons();
+                
+                // Atualizar controles de paginação
+                updatePaginationControls(products);
+            }
+
+            // Função para atualizar os controles de paginação
+            function updatePaginationControls(products) {
+                if (!prevPage || !nextPage || !pageNumber) return;
+                
+                // Se a lista filtrada for menor ou igual ao número de itens na primeira página,
+                // esconder a paginação completamente
+                if (products.length <= productsPerPage[0]) {
+                    prevPage.style.display = 'none';
+                    nextPage.style.display = 'none';
+                    pageNumber.textContent = '1';
+                    currentPage = 1;
+                    return;
+                }
+                
+                // Calcular o número total de páginas necessárias
+                let totalPages = 0;
+                let itemsLeft = products.length;
+                
+                for (let i = 0; i < productsPerPage.length && itemsLeft > 0; i++) {
+                    itemsLeft -= productsPerPage[i];
+                    totalPages++;
+                }
+                
+                // Limitar à página atual dentro do intervalo válido
+                if (currentPage > totalPages) {
+                    currentPage = totalPages;
+                }
+                
+                pageNumber.textContent = currentPage;
+                prevPage.style.display = currentPage === 1 ? 'none' : 'flex';
+                nextPage.style.display = currentPage === totalPages ? 'none' : 'flex';
+            }
+
+            // Função para filtrar produtos
+            function filterProducts() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                
+                if (searchTerm === '') {
+                    // Se o campo de pesquisa estiver vazio, mostrar todos os produtos
+                    filteredProducts = [...allProducts];
+                } else {
+                    // Filtrar produtos com base no texto de pesquisa
+                    filteredProducts = allProducts.filter(product => {
+                        const productName = product.querySelector('h3').textContent.toLowerCase();
+                        const productDesc = product.querySelector('p').textContent.toLowerCase();
+                        return productName.includes(searchTerm) || productDesc.includes(searchTerm);
+                    });
+                }
+                
+                // Resetar para a primeira página e mostrar os produtos filtrados
+                currentPage = 1;
+                showProducts(currentPage, filteredProducts);
+            }
+            
+            // Event Listeners para pesquisa
+            if (searchButton) {
+                searchButton.addEventListener('click', filterProducts);
+            }
+            
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        filterProducts();
+                    }
+                });
+                
+                // Opcional: pesquisa dinâmica enquanto o usuário digita
+                searchInput.addEventListener('input', function() {
+                    // Pequeno atraso para não processar cada tecla individualmente
+                    clearTimeout(this.searchTimeout);
+                    this.searchTimeout = setTimeout(filterProducts, 300);
+                });
+            }
+
+            // Event Listeners para paginação
+            if (nextPage) {
+                nextPage.addEventListener('click', function() {
+                    if (currentPage < maxPages) {
+                        currentPage++;
+                        showProducts(currentPage, filteredProducts);
+                        scrollToTop();
+                    }
+                });
+            }
+
+            if (prevPage) {
+                prevPage.addEventListener('click', function() {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        showProducts(currentPage, filteredProducts);
+                        scrollToTop();
+                    }
+                });
+            }
+
+            function scrollToTop() {
+                window.scrollTo({
+                    top: document.querySelector('.all-products').offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+
+            // Inicializar a primeira página
+            showProducts(1, allProducts);
+            
+            // Garantir que todos os links de produtos funcionem corretamente
+            const productLinks = document.querySelectorAll('.product-card a');
+            
+            productLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Confirmar que o link tem o parâmetro id
+                    const href = this.getAttribute('href');
+                    if (!href.includes('?id=')) {
+                        e.preventDefault();
+                        console.error('Link sem ID de produto detectado:', href);
+                    }
+                });
+            });
+            
+            // Verificar se as imagens dos produtos estão carregando corretamente
+            const productImages = document.querySelectorAll('.product-card img');
+            
+            productImages.forEach(img => {
+                img.addEventListener('error', function() {
+                    console.warn('Erro ao carregar imagem:', this.src);
+                    this.src = 'imagens/placeholder.jpg'; // Carregar imagem placeholder em caso de erro
+                });
+            });
+
+            // Configurar os botões "Adicionar ao Carrinho"
+            function setupAddToCartButtons() {
+                document.querySelectorAll('.add-to-cart').forEach(button => {
+                    if (!button.hasAttribute('data-initialized')) {
+                        button.setAttribute('data-initialized', 'true');
+                        
+                        button.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            
+                            // Obter informações do produto do card
+                            const productCard = this.closest('.product-card');
+                            const productName = productCard.querySelector('h3').textContent;
+                            const productDesc = productCard.querySelector('p').textContent;
+                            const productPrice = productCard.querySelector('.price').textContent;
+                            const productImage = productCard.querySelector('img').src;
+                            const productLink = productCard.querySelector('a').href;
+                            const productId = productLink.split('?id=')[1];
+                            
+                            // Verificar se o produto já está no carrinho
+                            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                            const existingProductIndex = cart.findIndex(item => item.id === productId);
+                            
+                            if (existingProductIndex >= 0) {
+                                // Se o produto já estiver no carrinho, aumentar a quantidade
+                                cart[existingProductIndex].quantity += 1;
+                            } else {
+                                // Se não estiver no carrinho, adicionar
+                                cart.push({
+                                    id: productId,
+                                    name: productName,
+                                    description: productDesc,
+                                    price: productPrice,
+                                    image: productImage,
+                                    quantity: 1
+                                });
+                            }
+                            
+                            // Salvar carrinho atualizado
+                            localStorage.setItem('cart', JSON.stringify(cart));
+                            
+                            // Atualizar contador do carrinho
+                            const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+                            document.querySelector('.cart-count').textContent = cartCount;
+                            
+                            // Efeito visual de feedback
+                            this.textContent = 'Adicionado ✓';
+                            this.style.backgroundColor = '#2ecc71';
+                            
+                            setTimeout(() => {
+                                this.textContent = 'Adicionar ao Carrinho';
+                                this.style.backgroundColor = '';
+                            }, 1500);
+                        });
+                    }
+                });
+            }
+            
+            // Executar a configuração inicial e após mudanças de página
+            setupAddToCartButtons();
+        });
+    </script>
+</body>
+</html> 

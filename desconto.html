@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos com Desconto - MaxPower</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://accounts.google.com/gsi/client" async></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>MaxPower</h1>
+            </div>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="products.html">Produtos</a></li>
+                <li><a href="index.html#contato">Contato</a></li>
+                <li class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count"></span>
+                </li>
+                <li class="user-icon">
+                    <i class="fas fa-user-circle" id="userIcon"></i>
+                </li>
+            </ul>
+        </nav>
+        <div class="menu-overlay"></div>
+    </header>
+
+    <!-- Modal de Login -->
+    <div class="login-modal" id="loginModal">
+        <div class="modal-overlay">
+            <div class="modal-container">
+                <span class="modal-close">&times;</span>
+                <h2 class="modal-title">MaxPower</h2>
+                
+                <div class="modal-buttons">
+                    <button class="btn-google">
+                        <i class="fab fa-google"></i> Continuar com Google
+                    </button>
+                    
+                    <button class="btn-email" onclick="window.location.href='login.html'">
+                        <i class="fas fa-envelope"></i> Continuar com Email
+                    </button>
+                </div>
+                
+                <div class="modal-divider">ou</div>
+                
+                <button class="btn-signup" onclick="window.location.href='cadastro.html'">
+                    <i class="fas fa-user-plus"></i> Cadastre-se
+                </button>
+                
+                <p class="modal-terms">
+                    Ao continuar, você concorda com nossos 
+                    <a href="#">Termos</a> e 
+                    <a href="#">Privacidade</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <main class="products-page">
+        <section class="all-products">
+            <h2>Promoção Primeira Compra - 20% OFF</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <a href="produto.html?id=whey">
+                        <img src="imagens/whey.jpg" alt="Whey Protein">
+                    </a>
+                    <h3>Whey Protein</h3>
+                    <p>Proteína de alta qualidade para ganho de massa muscular</p>
+                    <div class="price-container">
+                        <span class="original-price">R$ 149,90</span>
+                        <span class="discounted-price">R$ 119,92</span>
+                    </div>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+                <div class="product-card">
+                    <a href="produto.html?id=bcaa">
+                        <img src="imagens/bcaa.jpg" alt="BCAA">
+                    </a>
+                    <h3>BCAA</h3>
+                    <p>Aminoácidos essenciais para recuperação muscular</p>
+                    <div class="price-container">
+                        <span class="original-price">R$ 89,90</span>
+                        <span class="discounted-price">R$ 71,92</span>
+                    </div>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+                <div class="product-card">
+                    <a href="produto.html?id=creatina">
+                        <img src="imagens/creatina.jpg" alt="Creatina Muscletech">
+                    </a>
+                    <h3>Creatina Muscletech</h3>
+                    <p>Suplemento essencial para força e performance</p>
+                    <div class="price-container">
+                        <span class="original-price">R$ 79,90</span>
+                        <span class="discounted-price">R$ 63,92</span>
+                    </div>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+                <div class="product-card">
+                    <a href="produto.html?id=gold">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Gold">
+                    </a>
+                    <h3>Whey Protein Gold</h3>
+                    <p>Proteína premium para ganho de massa muscular</p>
+                    <div class="price-container">
+                        <span class="original-price">R$ 129,90</span>
+                        <span class="discounted-price">R$ 103,92</span>
+                    </div>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+                <div class="product-card">
+                    <a href="produto.html?id=isolado">
+                        <img src="imagens/whey.jpg" alt="Whey Protein Isolado">
+                    </a>
+                    <h3>Whey Protein Isolado Premium</h3>
+                    <p>Proteína isolada para definição muscular</p>
+                    <div class="price-container">
+                        <span class="original-price">R$ 199,90</span>
+                        <span class="discounted-price">R$ 159,92</span>
+                    </div>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+                <div class="product-card">
+                    <a href="produto.html?id=creatinaPremium">
+                        <img src="imagens/creatina.jpg" alt="Creatina Premium">
+                    </a>
+                    <h3>Creatina Premium</h3>
+                    <p>Creatina micronizada para ganho de força</p>
+                    <div class="price-container">
+                        <span class="original-price">R$ 99,90</span>
+                        <span class="discounted-price">R$ 79,92</span>
+                    </div>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+                <div class="product-card">
+                    <a href="produto.html?id=energy">
+                        <img src="imagens/bcaa.jpg" alt="BCAA Energy">
+                    </a>
+                    <h3>BCAA Energy</h3>
+                    <p>BCAA com cafeína para energia extra</p>
+                    <div class="price-container">
+                        <span class="original-price">R$ 109,90</span>
+                        <span class="discounted-price">R$ 87,92</span>
+                    </div>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+                <div class="product-card">
+                    <a href="produto.html?id=multivitaminico">
+                        <img src="imagens/creatina.jpg" alt="Multivitamínico Daily">
+                    </a>
+                    <h3>Multivitamínico Daily</h3>
+                    <p>Suplemento vitamínico para seu dia a dia</p>
+                    <div class="price-container">
+                        <span class="original-price">R$ 59,90</span>
+                        <span class="discounted-price">R$ 53,91</span>
+                    </div>
+                    <button class="add-to-cart">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>MaxPower</h3>
+                <p>Sua parceira em suplementos de qualidade</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p>Email: gsilvadossantos921@gmail.com</p>
+                <p>Telefone: (55) 99109-2922</p>
+            </div>
+            <div class="footer-section">
+                <h3>Redes Sociais</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MaxPower. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Garantir que todos os links de produtos funcionem corretamente
+            const productLinks = document.querySelectorAll('.product-card a');
+            
+            productLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Confirmar que o link tem o parâmetro id
+                    const href = this.getAttribute('href');
+                    if (!href.includes('?id=')) {
+                        e.preventDefault();
+                        console.error('Link sem ID de produto detectado:', href);
+                    }
+                });
+            });
+            
+            // Verificar se as imagens dos produtos estão carregando corretamente
+            const productImages = document.querySelectorAll('.product-card img');
+            
+            productImages.forEach(img => {
+                img.addEventListener('error', function() {
+                    console.warn('Erro ao carregar imagem:', this.src);
+                    this.src = 'imagens/placeholder.jpg'; // Carregar imagem placeholder em caso de erro
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

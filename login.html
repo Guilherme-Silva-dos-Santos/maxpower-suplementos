@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MaxPower</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .login-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 0;
+            position: relative;
+        }
+        
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        
+        .login-box {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .login-header h2 {
+            color: var(--primary-color);
+            font-size: 2.3rem;
+            margin-bottom: 8px;
+            margin-top: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .login-header h2:hover {
+            transform: scale(1.03);
+        }
+        
+        .login-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .login-form {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 0;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #444;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.1);
+        }
+        
+        .options-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 3px 0 10px;
+        }
+        
+        .remember-check {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .remember-check label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .forgot-link {
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .login-btn:hover {
+            background-color: #ff3333;
+            transform: translateY(-2px);
+        }
+        
+        .divider {
+            text-align: center;
+            position: relative;
+            margin: 20px 0;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background-color: #ddd;
+        }
+        
+        .divider::before {
+            left: 0;
+        }
+        
+        .divider::after {
+            right: 0;
+        }
+        
+        .google-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: white;
+            color: #444;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .google-btn i {
+            color: #4285F4;
+            font-size: 1.1rem;
+        }
+        
+        .google-btn:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .signup-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .back-link {
+            color: var(--white);
+            text-decoration: none;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            transform: translateX(-3px);
+        }
+        
+        .back-link i {
+            font-size: 1.1rem;
+        }
+        
+        /* Responsividade para telas pequenas */
+        @media (max-height: 700px) {
+            .login-box {
+                padding: 25px 30px;
+            }
+            
+            .login-header h2 {
+                font-size: 2rem;
+                margin-bottom: 5px;
+            }
+            
+            .login-header p {
+                font-size: 0.95rem;
+                margin-bottom: 15px;
+            }
+            
+            .login-form {
+                gap: 12px;
+            }
+            
+            .form-group input {
+                padding: 10px 12px;
+            }
+            
+            .login-btn, .google-btn {
+                padding: 10px;
+            }
+            
+            .divider {
+                margin: 15px 0;
+            }
+        }
+        
+        /* Estilos para a tela de recuperação de senha */
+        .password-recovery {
+            display: none;
+            max-width: 100%;
+        }
+        
+        .password-recovery.active {
+            display: block;
+        }
+        
+        .login-form.hidden {
+            display: none;
+        }
+        
+        .back-to-login {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        
+        .back-to-login:hover {
+            text-decoration: underline;
+        }
+        
+        .recovery-message {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .envelope-animation {
+            margin: 10px auto;
+            font-size: 3rem;
+            color: #2e7d32;
+            display: block;
+            text-align: center;
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <h2 onclick="window.location.href='index.html'">MaxPower</h2>
+                <p>Entre na sua conta</p>
+            </div>
+            
+            <form class="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" required>
+                </div>
+                
+                <div class="options-row">
+                    <div class="remember-check">
+                        <input type="checkbox" id="lembrar" name="lembrar">
+                        <label for="lembrar">Lembrar-me</label>
+                    </div>
+                    <a href="#" class="forgot-link" id="forgotPasswordLink">Esqueceu a senha?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">Entrar</button>
+                
+                <div class="divider">ou</div>
+                
+                <button type="button" class="google-btn">
+                    <i class="fab fa-google"></i> Continuar com Google
+                </button>
+            </form>
+            
+            <!-- Formulário de recuperação de senha -->
+            <form class="password-recovery">
+                <div class="form-group">
+                    <label for="recovery-email">Digite seu email</label>
+                    <input type="email" id="recovery-email" name="recovery-email" placeholder="seu@email.com" required>
+                </div>
+                
+                <p>Enviaremos um link de recuperação para o seu email.</p>
+                
+                <button type="submit" class="login-btn">Enviar Link de Recuperação</button>
+                
+                <div class="recovery-message">
+                    <i class="fas fa-envelope envelope-animation"></i>
+                    <p>Link de recuperação enviado!</p>
+                    <p>Verifique sua caixa de entrada para redefinir sua senha.</p>
+                </div>
+                
+                <a class="back-to-login">Voltar para o login</a>
+            </form>
+            
+            <div class="signup-link">
+                Ainda não tem uma conta? <a href="cadastro.html">Cadastre-se</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.querySelector('.login-form');
+            const recoveryForm = document.querySelector('.password-recovery');
+            const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+            const backToLoginLink = document.querySelector('.back-to-login');
+            const recoveryMessage = document.querySelector('.recovery-message');
+            
+            // Configurar o link "Esqueceu a senha?"
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                loginForm.classList.add('hidden');
+                recoveryForm.classList.add('active');
+            });
+            
+            // Configurar o link "Voltar para o login"
+            backToLoginLink.addEventListener('click', function() {
+                loginForm.classList.remove('hidden');
+                recoveryForm.classList.remove('active');
+                recoveryMessage.style.display = 'none';
+            });
+            
+            // Lidar com o envio do formulário de recuperação
+            recoveryForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const emailInput = document.getElementById('recovery-email');
+                const submitButton = recoveryForm.querySelector('.login-btn');
+                const originalText = submitButton.textContent;
+                
+                // Validar o email
+                if (!emailInput.value || !emailInput.checkValidity()) {
+                    alert('Por favor, insira um email válido.');
+                    return;
+                }
+                
+                // Simulação de envio do link de recuperação
+                submitButton.textContent = 'Enviando...';
+                submitButton.disabled = true;
+                
+                // Criar efeito de carregamento
+                let dots = 0;
+                const loadingInterval = setInterval(() => {
+                    dots = (dots + 1) % 4;
+                    const dotsText = '.'.repeat(dots);
+                    submitButton.textContent = `Enviando${dotsText}`;
+                }, 300);
+                
+                setTimeout(() => {
+                    // Parar o efeito de carregamento
+                    clearInterval(loadingInterval);
+                    
+                    // Mostrar mensagem de sucesso com animação
+                    recoveryMessage.style.display = 'block';
+                    
+                    // Mudar aparência do botão
+                    submitButton.textContent = 'Enviado com Sucesso ✓';
+                    submitButton.style.backgroundColor = '#2ecc71';
+                    
+                    // Limpar o campo de email
+                    emailInput.value = '';
+                    
+                    // Após 5 segundos, permitir que o usuário envie novamente se necessário
+                    setTimeout(() => {
+                        submitButton.textContent = originalText;
+                        submitButton.style.backgroundColor = '';
+                        submitButton.disabled = false;
+                    }, 5000);
+                }, 2500);
+            });
+            
+            // Código existente para o login
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulação de login
+                const submitButton = loginForm.querySelector('.login-btn');
+                const originalText = submitButton.textContent;
+                
+                submitButton.textContent = 'Entrando...';
+                submitButton.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Login realizado com sucesso!');
+                    
+                    // Redirecionar para a página inicial
+                    window.location.href = 'index.html';
+                }, 1500);
+            });
+            
+            // Configuração do botão Google
+            const googleBtn = document.querySelector('.google-btn');
+            if (googleBtn) {
+                googleBtn.addEventListener('click', function() {
+                    // Simulação do processo de login Google
+                    const simulateGoogleLogin = () => {
+                        const submitButton = googleBtn;
+                        submitButton.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Processando...';
+                        submitButton.disabled = true;
+                        
+                        setTimeout(() => {
+                            // Simular que o login foi bem-sucedido
+                            
+                            // Dados de usuário simulados
+                            const mockUserData = {
+                                name: 'Usuário Google',
+                                email: 'usuario@gmail.com',
+                                picture: 'https://ui-avatars.com/api/?name=Usuario+Google&background=random'
+                            };
+                            
+                            // Salvar informações do usuário no localStorage
+                            localStorage.setItem('userProfile', JSON.stringify({
+                                name: mockUserData.name,
+                                email: mockUserData.email,
+                                picture: mockUserData.picture,
+                                isLoggedIn: true
+                            }));
+                            
+                            // Mostrar mensagem de sucesso
+                            alert(`Bem-vindo, ${mockUserData.name}!`);
+                            
+                            // Redirecionar para a página inicial
+                            window.location.href = 'index.html';
+                        }, 2000);
+                    };
+                    
+                    // Simulação de confirmação Google
+                    const shouldContinue = confirm('Você será conectado usando sua conta Google\nDeseja continuar?');
+                    if (shouldContinue) {
+                        simulateGoogleLogin();
+                    }
+                    
+                    /*
+                    // Código original do OAuth do Google (comentado)
+                    // Este código só funcionará quando o site estiver hospedado em um servidor web
+                    // e com as credenciais OAuth do Google configuradas corretamente
+                    const googleAuthUrl = 'https://accounts.google.com/o/oauth2/auth' +
+                        '?client_id=698487548383-bg3b80ihp78kf9k59v6sialr03k2lloj.apps.googleusercontent.com' +
+                        '&redirect_uri=' + encodeURIComponent(window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + 'auth-callback.html') +
+                        '&response_type=token' +
+                        '&scope=email profile' +
+                        '&prompt=select_account';
+                    
+                    window.open(
+                        googleAuthUrl,
+                        'googleAuthPopup',
+                        `width=500,height=600,left=${(window.innerWidth - 500) / 2},top=${(window.innerHeight - 600) / 2},resizable=yes,scrollbars=yes`
+                    );
+                    */
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
